@@ -52,8 +52,10 @@ const CropPoint = ({
     [externalOnDrag, cropPoints]
   )
 
+  const nodeRef = React.useRef(null)
   return (
     <Draggable
+      nodeRef={nodeRef}
       bounds={bounds}
       defaultPosition={defaultPosition}
       position={{
@@ -63,7 +65,10 @@ const CropPoint = ({
       onDrag={onDrag}
       onStop={onStop}
     >
-      <div style={buildCropPointStyle(pointSize, pointBgColor, pointBorder)} />
+      <div
+        ref={nodeRef}
+        style={buildCropPointStyle(pointSize, pointBgColor, pointBorder)}
+      />
     </Draggable>
   )
 }

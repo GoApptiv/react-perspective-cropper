@@ -6,9 +6,8 @@ import React, {
   useState,
   Fragment
 } from 'react'
-import { useOpenCv } from 'opencv-react'
+import { useOpenCv } from '@goapptiv/opencv-react'
 import T from 'prop-types'
-
 import { calcDims, readFile, isCrossOriginURL } from '../lib/utils'
 import CropPoints from '../lib/CropPoints'
 import { applyFilter, transform } from '../lib/imgManipulation'
@@ -59,7 +58,7 @@ const Canvas = ({
           setPreviewPaneDimensions
         )
 
-        if(opts.filterCvParams){
+        if (opts.filterCvParams) {
           applyFilter(cv, canvasRef.current, opts.filterCvParams)
         }
 
@@ -77,7 +76,7 @@ const Canvas = ({
   }))
 
   useEffect(() => {
-    if (mode === 'preview') {
+    if (mode === 'preview' && cv) {
       showPreview()
     }
   }, [mode])
@@ -113,7 +112,7 @@ const Canvas = ({
         setPreviewPaneDimensions()
         resolve()
       }
-      if (isCrossOriginURL(src)) img.crossOrigin = "anonymous"
+      if (isCrossOriginURL(src)) img.crossOrigin = 'anonymous'
       img.src = src
     })
   }
