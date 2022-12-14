@@ -9,7 +9,9 @@ const buildCropPointStyle = (size, pointBgColor, pointBorder) => ({
   border: pointBorder,
   borderRadius: '100%',
   position: 'absolute',
-  zIndex: 1001
+  zIndex: 1001,
+  display: 'grid',
+  placeItems: 'center'
 })
 
 const CropPoint = ({
@@ -36,6 +38,8 @@ const CropPoint = ({
     },
     [externalOnDrag]
   )
+
+  const pointColor = pointBorder.split(' ')[2]
 
   const onStop = useCallback(
     (_, position) => {
@@ -65,10 +69,11 @@ const CropPoint = ({
       onDrag={onDrag}
       onStop={onStop}
     >
-      <div
-        ref={nodeRef}
-        style={buildCropPointStyle(pointSize, pointBgColor, pointBorder)}
-      />
+      <div style={buildCropPointStyle(pointSize, pointBgColor, pointBorder)}>
+        <div
+          style={{ height: '2px', width: '2px', backgroundColor: 'black' }}
+        />
+      </div>
     </Draggable>
   )
 }
